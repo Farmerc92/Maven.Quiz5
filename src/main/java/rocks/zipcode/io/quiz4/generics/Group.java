@@ -41,4 +41,10 @@ public class Group<_> implements GroupInterface<_> {
     public Iterator<_> iterator() {
         return list.iterator();
     }
+
+    @Override
+    public String toString(){
+        return list + "";
+    }
+
 }
