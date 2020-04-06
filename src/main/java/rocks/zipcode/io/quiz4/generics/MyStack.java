@@ -1,40 +1,40 @@
 package rocks.zipcode.io.quiz4.generics;
 
-import java.util.Deque;
-import java.util.EmptyStackException;
-import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.*;
 
 /**
  * @author leon on 11/12/2018.
  */
 public class MyStack<SomeType> implements Iterable<SomeType> {
-    private Deque<SomeType> deque;
+    private Stack<SomeType> stack;
     public MyStack() {
-        deque = new LinkedList<>();
+        stack = new Stack<>();
     }
 
     public Boolean isEmpty() {
-        return deque.isEmpty();
+        return stack.isEmpty();
     }
 
     public void push(SomeType i) {
-        deque.push(i);
+        stack.push(i);
     }
 
     public SomeType peek() {
-        return deque.peek();
+        if (isEmpty()){
+            return null;
+        }
+        return stack.peek();
     }
 
     public SomeType pop() {
-        if (deque.size() == 0){
+        if (stack.size() == 0){
             throw new EmptyStackException();
         }
-        return deque.pop();
+        return stack.pop();
     }
 
     @Override
     public Iterator<SomeType> iterator() {
-        return deque.iterator();
+        return stack.iterator();
     }
 }
