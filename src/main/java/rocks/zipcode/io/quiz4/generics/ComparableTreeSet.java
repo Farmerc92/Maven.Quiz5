@@ -1,35 +1,32 @@
 package rocks.zipcode.io.quiz4.generics;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.*;
 
 /**
  * @author leon on 11/12/2018.
  */
-public class ComparableTreeSet<_> extends TreeSet<_> implements Comparable<ComparableTreeSet<_>>{
-    private TreeSet<_> treeSet;
+public class ComparableTreeSet<T extends Comparable<T>> extends TreeSet<T> implements Comparable<ComparableTreeSet<T>>{
+    private TreeSet<T> set = new TreeSet<>();
 
-    public ComparableTreeSet(_... arr) {
-        treeSet = new TreeSet<>(Arrays.asList(arr));
+    public ComparableTreeSet(T... arr) {
+        set.addAll(Arrays.asList(arr));
     }
 
 
     public ComparableTreeSet() {
-        treeSet = new TreeSet<>();
     }
 
-
+    public TreeSet<T> getTreeSet() {
+        return set;
+    }
 
     @Override
-    public int compareTo(ComparableTreeSet<_> o) {
-        return Integer.valueOf(null);
+    public int compareTo(ComparableTreeSet<T> o) {
+        return this.toString().compareTo(o.toString());
     }
 
     @Override
     public String toString(){
-        return "";
+        return set + "";
     }
 }
