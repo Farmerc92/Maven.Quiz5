@@ -7,17 +7,17 @@ import java.util.*;
  */
 public class GenericUtils {
     public static <T extends Comparable> Iterable<? extends Iterable<T>> powerSet(Set<T> originalSet) {
+        List<Set<T>> output = new ArrayList<>();
         TreeSet<T> sortedInput = new TreeSet<>(originalSet);
-        Iterator<T> iteratorSort = sortedInput.iterator();
-        Set<HashSet<T>> output = new LinkedHashSet<>();
-        output.add(new HashSet<>(originalSet));
-        int count = originalSet.size();
-        while(iteratorSort.hasNext() && count != 0){
-
+        output.add(sortedInput);
+        List<T> list = new ArrayList<>(originalSet);
+        for (int i = 0; i < list.size(); i++) {
+            for (int j = 0; j < list.size(); j++) {
+                if (i != j && list.size() > 2)
+                    output.add(new LinkedHashSet<>(Arrays.asList(list.get(i), list.get(j))));
+            }
+            output.add(new HashSet<>(Collections.singletonList(list.get(i))));
         }
-        Iterator<T> iterator = originalSet.iterator();
-        output.add(new HashSet<>(Arrays.asList(iterator.next())));
-        output.add(new HashSet<>(Arrays.asList(iterator.next())));
         output.add(new HashSet<>());
         return output;
     }
@@ -25,5 +25,6 @@ public class GenericUtils {
     public static <_ extends Comparable> Iterable<? extends Iterable<_>> powerSet(_... originalSet) {
         return powerSet(new TreeSet<>(Arrays.asList(originalSet)));
     }
+
 }
 
